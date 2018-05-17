@@ -1,6 +1,8 @@
 FROM gcr.io/kaniko-project/executor:debug
 
-ADD /busybox/sh /bin/sh
+RUN mkdir bin
+
+RUN ln -s /busybox/sh /bin/sh
 
 ENV PATH /usr/local/bin:/bin
 
