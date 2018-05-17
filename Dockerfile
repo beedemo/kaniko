@@ -4,6 +4,7 @@ FROM busybox:1.28.3
 RUN mkdir /usr/bin
 RUN cp /bin/sh /usr/bin/sh && cp /bin/cat /usr/bin/cat && cp /bin/cp /usr/bin/cp && cp /bin/ls /usr/bin/ls
 RUN rm -rf /bin/*
+RUN cp /usr/bin/sh /bin/sh
 COPY ./executor /kaniko/executor
 COPY ./docker-credential-gcr /usr/local/bin/docker-credential-gcr
 COPY ./docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
