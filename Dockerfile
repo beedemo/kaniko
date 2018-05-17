@@ -9,6 +9,6 @@ COPY ./docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 COPY ./certs/ /kaniko/ssl/certs/
 ENV HOME /root
 ENV USER /root
-ENV PATH /usr/local/bin
+ENV PATH /bin:/usr/local/bin
 ENV SSL_CERT_DIR=/kaniko/ssl/certs
 ENTRYPOINT ["/kaniko/executor"]
