@@ -1,7 +1,8 @@
 FROM busybox:1.28.3
 
 #remove files that conflict with kaniko
-RUN rm /bin/ash && rm /bin/base64
+RUN cp /bin/sh /usr/bin/sh && cp /bin/cat /usr/bin/cat && cp /bin/cp /usr/bin/cp && cp /bin/ls /usr/bin/ls
+RUN rm -rf /bin/*
 COPY ./executor /kaniko/executor
 COPY ./docker-credential-gcr /usr/local/bin/docker-credential-gcr
 COPY ./docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
