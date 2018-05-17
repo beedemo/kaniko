@@ -1,5 +1,6 @@
 FROM busybox:1.28.3
 
+RUN rm /bin/ash
 COPY ./executor /kaniko/executor
 COPY ./docker-credential-gcr /usr/local/bin/docker-credential-gcr
 COPY ./docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
