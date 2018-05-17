@@ -13,8 +13,9 @@ pipeline {
         sh 'docker cp kaniko-executor:/kaniko/ssl/certs/ ./certs/'
         sh 'docker rm -f kaniko-executor'
         sh 'ls -ls'
-        sh 'cd certs'
-        sh 'ls -la'
+        dir('cert') {
+          sh 'ls -la'
+        }
         stash includes: 'executor', name: 'kaniko-executor'
       }
     }
