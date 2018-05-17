@@ -1,7 +1,7 @@
 FROM alpine
 
 # need to have `nohup`
-RUN apk add --no-cache coreutils bash
+RUN apk add --no-cache coreutils
 
 COPY ./executor /kaniko/executor
 COPY ./docker-credential-gcr /usr/local/bin/docker-credential-gcr
