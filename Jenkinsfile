@@ -16,7 +16,7 @@ pipeline {
         sh 'docker cp kaniko-executor:/usr/local/bin/docker-credential-ecr-login ./docker-credential-ecr-login'
         sh 'docker cp kaniko-executor:/kaniko/ssl/certs/ ./certs/'
         sh 'docker rm -f kaniko-executor'
-        dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-1", ".", "${DOCKER_CREDENTIAL_ID}")
+        dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-2", ".", "${DOCKER_CREDENTIAL_ID}")
       }
     }
   }
