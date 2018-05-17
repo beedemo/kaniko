@@ -10,7 +10,7 @@ pipeline {
         sh 'docker cp kaniko-executor:/kaniko/executor ./executor'
         sh 'docker cp kaniko-executor:/usr/local/bin/docker-credential-gcr ./docker-credential-gcr'
         sh 'docker cp kaniko-executor:/usr/local/bin/docker-credential-ecr-login ./docker-credential-ecr-login'
-        sh 'docker cp kaniko-executor:/kaniko/ssl/certs/ ./certs/
+        sh 'docker cp kaniko-executor:/kaniko/ssl/certs/ ./certs/'
         sh 'docker rm -f kaniko-executor'
         sh 'ls -ls'
         sh 'cd certs'
