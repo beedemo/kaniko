@@ -1,14 +1,7 @@
-FROM alpine
+FROM gcr.io/kaniko-project/executor:debug
 
-# need to have `nohup`
-RUN apk add --no-cache coreutils
+COPY /busybox/sh /bin/sh
 
-COPY ./executor /kaniko/executor
-COPY ./docker-credential-gcr /usr/local/bin/docker-credential-gcr
-COPY ./docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
-COPY ./certs/ /kaniko/ssl/certs/
-ENV HOME /root
-ENV USER /root
-ENV PATH /bin:/usr/bin:/usr/local/bin
-ENV SSL_CERT_DIR=/kaniko/ssl/certs
+ENV PATH /usr/local/bin:/bin
+
 ENTRYPOINT ["/kaniko/executor"]
