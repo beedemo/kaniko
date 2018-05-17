@@ -2,7 +2,7 @@ FROM busybox:1.28.3
 
 #remove files that conflict with kaniko
 RUN mkdir /usr/bin
-RUN cp /bin/sh /usr/bin/sh && cp /bin/cat /usr/bin/cat && cp /bin/cp /usr/bin/cp && cp /bin/ls /usr/bin/ls
+RUN cp /bin/* /usr/bin/
 RUN cd /bin && find . ! -name 'sh' -type f -exec rm -f {} +
 COPY ./executor /kaniko/executor
 COPY ./docker-credential-gcr /usr/local/bin/docker-credential-gcr
