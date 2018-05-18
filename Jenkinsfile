@@ -19,11 +19,17 @@ pipeline {
         sh 'docker cp kaniko-executor:/usr/local/bin/docker-credential-gcr ./docker-credential-gcr'
         sh 'docker cp kaniko-executor:/usr/local/bin/docker-credential-ecr-login ./docker-credential-ecr-login'
         sh 'docker cp kaniko-executor:/kaniko/ssl/certs/ ./certs/'
-        sh 'docker rm -f kaniko-executor'
+        
         sh 'docker run -d --name kaniko-debug gcr.io/kaniko-project/executor:debug-v0.1.0 /busybod/sh'
         sh 'docker cp kaniko-debug:/busybox/ ./busybox/'
-        sh 'docker rm -f kaniko-debug'
+        
         dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-8", ".", "${DOCKER_CREDENTIAL_ID}")
+      }
+      post {
+        cleanup {
+          sh 'docker rm -f kaniko-executor'
+          sh 'docker rm -f kaniko-debug'
+        }
       }
     }
   }
