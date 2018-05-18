@@ -26,7 +26,7 @@ pipeline {
         dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-8", ".", "${DOCKER_CREDENTIAL_ID}")
       }
       post {
-        cleanup {
+        always {
           sh 'docker rm -f kaniko-executor'
           sh 'docker rm -f kaniko-debug'
         }
