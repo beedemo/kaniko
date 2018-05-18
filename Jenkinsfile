@@ -14,13 +14,16 @@ pipeline {
         label 'docker'
       }
       steps {
-        sh 'docker run -d --name kaniko-executor gcr.io/kaniko-project/executor tail -f /dev/null'
+        sh 'docker run -d --name kaniko-executor gcr.io/kaniko-project/executor:latest tail -f /dev/null'
         sh 'docker cp kaniko-executor:/kaniko/executor ./executor'
         sh 'docker cp kaniko-executor:/usr/local/bin/docker-credential-gcr ./docker-credential-gcr'
         sh 'docker cp kaniko-executor:/usr/local/bin/docker-credential-ecr-login ./docker-credential-ecr-login'
         sh 'docker cp kaniko-executor:/kaniko/ssl/certs/ ./certs/'
         sh 'docker rm -f kaniko-executor'
-        dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-7", ".", "${DOCKER_CREDENTIAL_ID}")
+        sh 'docker run -d --name kaniko-debug gcr.io/kaniko-project/executor:debug-v0.1.0 /busybod/sh'
+        sh 'docker cp kaniko-debug:/busybox/ ./busybox/'
+        sh 'docker rm -f kaniko-debugr'
+        dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-8", ".", "${DOCKER_CREDENTIAL_ID}")
       }
     }
   }
