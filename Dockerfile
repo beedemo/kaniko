@@ -1,4 +1,4 @@
-FROM busybox:1.28.3
+FROM scratch
 
 #remove files that conflict with kaniko
 RUN mkdir /usr/bin
