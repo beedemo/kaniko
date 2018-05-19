@@ -23,7 +23,7 @@ pipeline {
         sh 'docker run -d --name kaniko-debug gcr.io/kaniko-project/executor:debug-v0.1.0 /busybod/sh'
         sh 'docker cp kaniko-debug:/busybox/ ./busybox/'
         
-        dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-8", ".", "${DOCKER_CREDENTIAL_ID}")
+        dockerBuildPush("${DOCKER_HUB_USER}", "kaniko", "jenkins-k8s-9", ".", "${DOCKER_CREDENTIAL_ID}")
       }
       post {
         always {
